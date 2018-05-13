@@ -8,6 +8,8 @@ namespace DataLayer.Identity
 {
     public class UserContext: IdentityDbContext<User>
     {
+        public DbSet<UserProfile> Profiles { get; set; }
+
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
     }
 }

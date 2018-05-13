@@ -8,5 +8,6 @@ namespace DataLayer.Identity
     public class User: IdentityUser
     {
         public string LastName { get; set; }
+       // IdentityRole Role { get; set; }
     }
 }
