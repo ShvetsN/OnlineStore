@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.Contexts;
 using DataLayer.Entities;
 using UnitOfWork.Interfaces;
 using UnitOfWork.Models;
@@ -51,7 +52,7 @@ namespace UnitOfWork.UnitOfWork
             }
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

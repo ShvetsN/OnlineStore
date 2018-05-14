@@ -7,7 +7,8 @@ namespace DataLayer.Identity
 {
     public class User: IdentityUser
     {
+        public string Name { get; set; }
         public string LastName { get; set; }
-       // IdentityRole Role { get; set; }
+        public UserRole Role { get; set; }
     }
 }

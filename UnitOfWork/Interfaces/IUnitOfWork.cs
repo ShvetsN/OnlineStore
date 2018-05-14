@@ -12,6 +12,6 @@ namespace UnitOfWork.Interfaces
         IRepository<Order, UnitOrder> Orders { get; }
         IRepository<Product, UnitProduct> Products{ get; }
         IRepository<Category, UnitCategory> Categories { get; }
-        Task Save();
+        Task SaveAsync();
     }
 }

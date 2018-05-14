@@ -7,10 +7,10 @@ namespace UnitOfWork.Interfaces
 {
     public interface IRepository<Entity,UnitEntity> where Entity : class where UnitEntity : class
     {
-        Task Create(UnitEntity entity);
-        Task Delete(int id);
-        Task Update(UnitEntity entity);
-        Task<UnitEntity> Read(int id);
-        Task<IEnumerable<UnitEntity>> ReadAll();
+        Task CreateAsync(UnitEntity entity);
+        Task DeleteAsync(int id);
+        Task UpdateAsync(UnitEntity entity);
+        Task<UnitEntity> ReadAsync(int id);
+        Task<IEnumerable<UnitEntity>> ReadAllAsync();
     }
 }

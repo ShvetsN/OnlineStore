@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataLayer.Identity
 {
-    class UserRole
+    public class UserRole: IdentityRole
     {
     }
 }
