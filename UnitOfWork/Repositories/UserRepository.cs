@@ -18,9 +18,11 @@ namespace UnitOfWork.Repositories
         {
             _context = context;
         }
+
+
         public async Task Authorized()
         {
-          
+            await _context.Users.AddAsync();
         }
 
         public Task Create()
