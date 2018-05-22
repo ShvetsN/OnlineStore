@@ -9,7 +9,9 @@ namespace UnitOfWork.Models
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public DateTime Date { get; set; }
-        // TypeOfDelivery
-        // Accepted
+        public TypeOfDelivery DeliveryType { get; set; }
+        public OrderState State { get; set; }
+
+        public ICollection<UnitProduct> Products { get; set; }
     }
 }
