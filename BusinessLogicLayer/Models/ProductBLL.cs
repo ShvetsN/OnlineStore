@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BusinessLogicLayer.Models
 {
-    class ProductBLL
+    public class ProductBLL
     {
         public int Id { get; set; }
         public string Name { get; set; }
