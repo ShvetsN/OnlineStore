@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    class UnitCategory
+    public class UnitCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }

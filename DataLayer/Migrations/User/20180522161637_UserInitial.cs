@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace DataLayer.Migrations
+namespace DataLayer.Migrations.User
 {
-    public partial class Initial : Migration
+    public partial class UserInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

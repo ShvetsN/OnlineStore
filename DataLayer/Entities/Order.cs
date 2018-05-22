@@ -11,8 +11,8 @@ namespace DataLayer.Entities
         public int CustomerId { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        // TypeOfDelivery
-        // Accepted
+        public TypeOfDelivery DeliveryType { get; set; }
+        public OrderState State { get; set; }
 
         public virtual ICollection<ProductOrder> Products { get; set; }
     }
