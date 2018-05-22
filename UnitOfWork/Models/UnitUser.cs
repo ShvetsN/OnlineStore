@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    class UnitUser
+    public class UnitUser
     {
         public string Email { get; set; }
         public string Password { get; set; }

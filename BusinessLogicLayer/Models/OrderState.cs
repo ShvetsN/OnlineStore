@@ -4,9 +4,10 @@ using System.Text;
 
 namespace BusinessLogicLayer.Models
 {
-    public class CategoryBLL
+    public enum OrderState
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        Confirmed,
+        InProcess,
+        Canceled
     }
 }

@@ -7,7 +7,7 @@ using UnitOfWork.Models;
 
 namespace UnitOfWork.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<Order, UnitOrder> Orders { get; }
         IRepository<Product, UnitProduct> Products{ get; }
