@@ -1,13 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using DataLayer.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DataLayer.Identity;
 
-namespace DataLayer.Contexts
+namespace DataLayer.Сontexts
 {
-    public class UserContext: IdentityDbContext<User>
+    public class UserContext:IdentityDbContext<User>
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
     }

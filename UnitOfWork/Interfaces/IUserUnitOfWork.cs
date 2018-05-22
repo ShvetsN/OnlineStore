@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataLayer.Identity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace UnitOfWork.Interfaces
 {
-    interface IUserUnitOfWork<T>: IDisposable where T:class
+    interface IUserUnitOfWork : IDisposable
     {
-        IUserRepository UsersProfile { get; }
-        UserManager<T> UserManager { get; }
-        RoleManager<T> RoleManager { get; }
-
+        UserManager<User> UserManager { get; }
+        RoleManager<User> RoleManager { get; }
         Task SaveAsync();
     }
 }

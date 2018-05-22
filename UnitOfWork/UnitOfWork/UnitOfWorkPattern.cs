@@ -9,7 +9,7 @@ using UnitOfWork.Models;
 
 namespace UnitOfWork.UnitOfWork
 {
-    class UnitOfWorkPattern : IUnitOfWork
+    public class UnitOfWorkPattern : IUnitOfWork
     {
         private readonly StoreContext _context;
 
