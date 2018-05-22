@@ -8,5 +8,7 @@ namespace UnitOfWork.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<UnitProduct> Products { get; set; }
     }
 }
