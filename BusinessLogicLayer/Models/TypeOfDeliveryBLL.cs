@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BusinessLogicLayer.Models
 {
-    public enum DeliveryType
+    public enum TypeOfDeliveryBLL
     {
         PostDelivery,
         CourierDelivery,
