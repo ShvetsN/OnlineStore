@@ -7,6 +7,7 @@ using DataLayer.Entities;
 namespace DataLayer.Contexts
 {
     public class StoreContext: DbContext
+
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Product { get; set; }

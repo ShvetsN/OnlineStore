@@ -11,7 +11,7 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class OrderManipulator : IOrderManipulator
+    public class OrderManipulator //: IOrderManipulator
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<OrderBLL> CreateOrder(OrderBLL order)
+       /* public async Task<OrderBLL> CreateOrder(OrderBLL order)
         {
             try
             {
@@ -33,6 +33,6 @@ namespace BusinessLogicLayer.Services
             {
                 return null;
             }
-        }
+        }*/
     }
 }

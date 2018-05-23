@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace UnitOfWork.Interfaces
 {
-    interface IUserUnitOfWork : IDisposable
+    interface IUserUnitOfWork
     {
-        UserManager<User> UserManager { get; }
-        RoleManager<User> RoleManager { get; }
-        Task SaveAsync();
+        Task Authorization();
+        Task Resistration();
     }
 }

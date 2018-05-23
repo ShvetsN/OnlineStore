@@ -4,7 +4,10 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    class TypeOfDelivery
+    public enum TypeOfDelivery
     {
+        СourierDelivery,
+        PostDelivery,
+        SelfDelivery
     }
 }

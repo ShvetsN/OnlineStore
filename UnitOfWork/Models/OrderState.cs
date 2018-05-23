@@ -4,7 +4,10 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    class OrderState
+    public enum OrderState
     {
+        Confirmed,
+        InProcess,
+        Canceled
     }
 }

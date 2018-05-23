@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using DataLayer.Contexts;
 using Microsoft.EntityFrameworkCore;
 using DataLayer.Сontexts;
+using UnitOfWork.Interfaces;
+using UnitOfWork.UnitOfWork;
 
 namespace OnlineStore
 {
@@ -26,6 +28,7 @@ namespace OnlineStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStore")));
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
             services.AddMvc();
