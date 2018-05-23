@@ -12,5 +12,6 @@ namespace BusinessLogicLayer.Models
         public double Price { get; set; }
         public string Photo { get; set; }
         public int Amount { get; set; }
+
     }
 }

@@ -21,17 +21,23 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<OrderBLL> CreateOrder(OrderBLL order)
+        public async Task CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
         {
             try
             {
-                order.Date = DateTime.Now;
-                return order;
+                OrderBLL order = new OrderBLL { CustomerId = customerId, DeliveryType = deliveryType, Date = DateTime.Now };
 
+                foreach (int a in products)
+                {
+                    order.Products.Add(new ProductOrderBLL { ProductId = a });
+                }
+
+                var unitOrder = _mapper.Map<UnitOrder>(order);
+                await _unitOfWork.Orders.CreateAsync(unitOrder);
             }
             catch (Exception)
             {
-                return null;
+                return;
             }
         }
     }
