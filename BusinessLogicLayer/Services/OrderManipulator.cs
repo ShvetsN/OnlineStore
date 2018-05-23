@@ -11,7 +11,7 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class OrderManipulator : IOrderManipulator
+    public class OrderManipulator////IOrderManipulator
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -26,7 +26,7 @@ namespace BusinessLogicLayer.Services
             try
             {
                 order.Date = DateTime.Now;
-
+                return order;
 
             }
             catch (Exception)
