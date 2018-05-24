@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using UnitOfWork.Models;
 
 namespace UnitOfWork.Interfaces
 {
-    interface IUserUnitOfWork
+    public interface IUserUnitOfWork
     {
-        Task Authorization();
-        Task Resistration();
+        Task<string> AuthorizationAsync(LoginUser user);
+        Task<string> RegistrationAsync(RegistrationUser user);
     }
 }

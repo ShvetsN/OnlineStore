@@ -7,7 +7,9 @@ namespace UnitOfWork.Models
     public enum TypeOfDelivery
     {
         СourierDelivery,
+
         PostDelivery,
+
         SelfDelivery
     }
 }

@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace BusinessLogicLayer.Models
+namespace UnitOfWork.Models
 {
-    public class UserBLL
+    public class RegistrationUser
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+
         public string LastName { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
         public string MobilePhone { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
-        public string Role { get; set; }
     }
 }

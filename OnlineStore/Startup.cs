@@ -13,6 +13,15 @@ using Microsoft.EntityFrameworkCore;
 using DataLayer.Сontexts;
 using UnitOfWork.Interfaces;
 using UnitOfWork.UnitOfWork;
+using BusinessLogicLayer.Services;
+using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using DataLayer.Identity;
+using AutoMapper;
+using BusinessLogicLayer.Interfaces;
 
 namespace OnlineStore
 {
@@ -28,9 +37,65 @@ namespace OnlineStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
+            services.AddAutoMapper();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStore")));
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
+            services.AddScoped<IIdentityService, IdentityServices>();
+            //services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
+            services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+
+
+            // ===== Add Identity ========
+
+            services.AddIdentity<User, UserRole>()
+                .AddEntityFrameworkStores<UserContext>()
+                .AddDefaultTokenProviders();
+
+
+
+            // ===== Add Jwt Authentication ========
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+
+            services
+
+                .AddAuthentication(options =>
+
+                {
+
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+
+
+                })
+
+                .AddJwtBearer(cfg =>
+
+                {
+
+                    cfg.RequireHttpsMetadata = false;
+
+                    cfg.SaveToken = true;
+
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+
+                    {
+
+                        ValidIssuer = Configuration["JwtIssuer"],
+
+                        ValidAudience = Configuration["JwtIssuer"],
+
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
+
+                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
+
+                    };
+
+                });
             services.AddMvc();
         }
 
@@ -42,6 +107,8 @@ namespace OnlineStore
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

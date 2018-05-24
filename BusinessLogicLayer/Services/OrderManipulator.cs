@@ -11,11 +11,8 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-<<<<<<< HEAD
+
     public class OrderManipulator //: IOrderManipulator
-=======
-    public class OrderManipulator////IOrderManipulator
->>>>>>> 4ba3af798ea174d35a0e1c28a8b7b231ab077b68
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -25,11 +22,8 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-<<<<<<< HEAD
-       /* public async Task<OrderBLL> CreateOrder(OrderBLL order)
-=======
+
         public async Task CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
->>>>>>> 4ba3af798ea174d35a0e1c28a8b7b231ab077b68
         {
             try
             {
@@ -47,6 +41,6 @@ namespace BusinessLogicLayer.Services
             {
                 return;
             }
-        }*/
+        }
     }
 }

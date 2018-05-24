@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataLayer.Сontexts
 {
-    public class UserContext:IdentityDbContext<User>
+    public class UserContext:IdentityDbContext<User, UserRole, string>
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
     }
