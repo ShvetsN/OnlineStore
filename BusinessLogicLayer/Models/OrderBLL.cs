@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Models
         public int CustomerId { get; set; }
         public DateTime Date { get; set; }
         public TypeOfDeliveryBLL DeliveryType { get; set; }
-        public OrderState State { get; set; } = OrderState.InProcess;
-        public ICollection<ProductOrderBLL> Products { get; set; } = new List<ProductOrderBLL>();
+        public OrderStateBLL State { get; set; } = OrderStateBLL.InProcess;
+        public ICollection<ProductOrderBLL> ProductOrders { get; set; } = new List<ProductOrderBLL>();
     }
 }
