@@ -11,6 +11,6 @@ namespace BusinessLogicLayer.Models
         public DateTime Date { get; set; }
         public TypeOfDeliveryBLL DeliveryType { get; set; }
         public OrderStateBLL State { get; set; } = OrderStateBLL.InProcess;
-        public ICollection<ProductOrderBLL> Products { get; set; } = new List<ProductOrderBLL>();
+        public ICollection<ProductOrderBLL> ProductOrders { get; set; } = new List<ProductOrderBLL>();
     }
 }
