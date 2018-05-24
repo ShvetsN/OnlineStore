@@ -9,7 +9,7 @@ namespace UnitOfWork.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Order, UnitOrder> Orders { get; }
+        IOrderRepository Orders { get; }
         IRepository<Product, UnitProduct> Products{ get; }
         IRepository<Category, UnitCategory> Categories { get; }
         Task SaveAsync();

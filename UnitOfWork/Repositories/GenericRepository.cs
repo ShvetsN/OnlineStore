@@ -10,7 +10,7 @@ using DataLayer.Contexts;
 
 namespace UnitOfWork.Repositories
 {
-    class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>  where Entity : class where UnitEntity : class
+    public class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>  where Entity : class where UnitEntity : class
     {
         protected readonly StoreContext _context;
         protected readonly IMapper _mapper;
@@ -41,7 +41,7 @@ namespace UnitOfWork.Repositories
 
         public async Task<IEnumerable<UnitEntity>> ReadAllAsync()
         {
-            var items = await _context.Set<Entity>().FindAsync();
+            var items = await _context.Set<Entity>().ToListAsync();
             return _mapper.Map<IEnumerable<UnitEntity>>(items);
         }
 

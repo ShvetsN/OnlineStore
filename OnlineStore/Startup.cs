@@ -22,6 +22,7 @@ using System.Text;
 using DataLayer.Identity;
 using AutoMapper;
 using BusinessLogicLayer.Interfaces;
+using UnitOfWork.Repositories;
 
 namespace OnlineStore
 {
@@ -41,6 +42,7 @@ namespace OnlineStore
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStore")));
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
             services.AddScoped<IIdentityService, IdentityServices>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             //services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
             services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
 

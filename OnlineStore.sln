@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitOfWork", "UnitOfWork\UnitOfWork.csproj", "{B2ED37A5-8B4C-4A1E-82F5-0C511A94F68B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "XUnitTestProject\XUnitTestProject.csproj", "{998E6F93-6E09-4806-897D-1B54E8C110C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B2ED37A5-8B4C-4A1E-82F5-0C511A94F68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2ED37A5-8B4C-4A1E-82F5-0C511A94F68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2ED37A5-8B4C-4A1E-82F5-0C511A94F68B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998E6F93-6E09-4806-897D-1B54E8C110C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998E6F93-6E09-4806-897D-1B54E8C110C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998E6F93-6E09-4806-897D-1B54E8C110C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998E6F93-6E09-4806-897D-1B54E8C110C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
