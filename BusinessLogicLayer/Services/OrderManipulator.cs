@@ -11,12 +11,8 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-<<<<<<< HEAD
 
-    public class OrderManipulator //: IOrderManipulator
-=======
     public class OrderManipulator : IOrderManipulator
->>>>>>> 8c73c0a21fc1b410c4f16908841133c6cc3c68e1
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -26,17 +22,12 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-<<<<<<< HEAD
-
-        public async Task CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
-=======
         /**
          * ATTENTION!ATTENTION!ATTENTION! 
          * We could just use UnitOrder without OrderBLL and mapping but rusik13312 is a person without even rating on github
          * 
          */
         public async Task<bool> CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
->>>>>>> 8c73c0a21fc1b410c4f16908841133c6cc3c68e1
         {
             try
             {

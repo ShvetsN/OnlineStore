@@ -12,8 +12,8 @@ namespace UnitOfWork.Repositories
 {
     class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>  where Entity : class where UnitEntity : class
     {
-        private readonly StoreContext _context;
-        private readonly IMapper _mapper;
+        protected readonly StoreContext _context;
+        protected readonly IMapper _mapper;
 
         public GenericRepository(StoreContext context, IMapper mapper)
         {
