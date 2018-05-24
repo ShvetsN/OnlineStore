@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using DataLayer.Contexts;
 using UnitOfWork.Models;
 using DataLayer.Entities;
@@ -14,6 +15,12 @@ namespace UnitOfWork.Repositories
     public class OrderRepository: GenericRepository<Order,UnitOrder>, IOrderRepository
     {
         public OrderRepository(IMapper mapper, StoreContext context): base(context, mapper) { }
+
+        public async Task<UnitOrder> ReadWithProductsAsync(int id)
+        {
+            var value = await _context.Orders.Include(c => c.Products).FirstOrDefaultAsync(o => o.Id == id);
+            return _mapper.Map<UnitOrder>(value);
+        }
 
         public async Task<IEnumerable<UnitOrder>> ReadAllWithProductsAsync()
         {

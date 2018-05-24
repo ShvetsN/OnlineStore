@@ -9,6 +9,7 @@ using UnitOfWork.Interfaces;
 using UnitOfWork.Models;
 
 
+
 namespace BusinessLogicLayer.Services
 {
 
@@ -57,7 +58,6 @@ namespace BusinessLogicLayer.Services
                     var products = await DecreaseAmountIfValid(id);
                     if (products != null)
                     {
-                        //Make other method
                         foreach (var product in products)
                         {
                             await _unitOfWork.Products.UpdateAsync(product);
@@ -87,18 +87,18 @@ namespace BusinessLogicLayer.Services
          * Return collection of non-repeating products with updated amount
          * If there're not enough amount at any product return null 
          */
-        protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
+        internal protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
         {
             //var item = Mapper.Map<OrderBLL>(_unitOfWork.Orders.ReadAsync(id));
-            var order = await _unitOfWork.Orders.ReadAsync(id);
+            var order = await _unitOfWork.Orders.ReadWithProductsAsync(id);
 
             var resProds = new List<UnitProduct>();
-            foreach (var product in order.Products)
+            foreach (var productOrder in order.Products)
             {
-                var item = resProds.Find(p => p.Id == product.Id);
+                var item = resProds.Find(p => p.Id == productOrder.ProductId);
                 if (item == null)
                 {
-                    item = product;
+                    item = productOrder.Product;
                     resProds.Add(item);
                 }
                 item.Amount--;
