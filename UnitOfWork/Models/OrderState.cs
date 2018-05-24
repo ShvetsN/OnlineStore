@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    class OrderState
+    public class OrderState
     {
     }
 }

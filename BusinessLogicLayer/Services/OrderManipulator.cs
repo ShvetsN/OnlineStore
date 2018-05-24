@@ -11,7 +11,7 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class OrderManipulator////IOrderManipulator
+    public class OrderManipulator : IOrderManipulator
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -38,6 +38,18 @@ namespace BusinessLogicLayer.Services
             catch (Exception)
             {
                 return;
+            }
+        }
+
+        public async Task ProcessOrder(int id, bool confirmed)
+        {
+            if (confirmed)
+            {
+                //await _unitOfWork.Orders.AcceptOrder(id);
+            }
+            else
+            {
+                //await _unitOfWork.Orders.DeclineOrder(id);
             }
         }
     }

@@ -4,10 +4,10 @@ using System.Text;
 
 namespace BusinessLogicLayer.Models
 {
-    public enum OrderState
+    public enum OrderStateBLL
     {
-        Confirmed,
         InProcess,
-        Canceled
+        Canceled,
+        Confirmed,
     }
 }

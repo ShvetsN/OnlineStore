@@ -8,7 +8,7 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface IOrderManipulator
     {
-        Task<OrderBLL> CreateOrder(OrderBLL order); 
+        Task CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType); 
         Task Update(int id, bool confirmed);
     }
 }
