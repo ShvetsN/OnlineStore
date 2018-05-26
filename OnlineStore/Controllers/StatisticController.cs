@@ -35,7 +35,7 @@ namespace OnlineStore.Controllers
 
         [HttpGet]
         [Route("/api/stati")]
-        public async Task<IActionResult> Stat(ProductModel product)
+        public async Task<IActionResult> Stat([FromBody] ProductModel product)
         {
             var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
             return Ok(result);
