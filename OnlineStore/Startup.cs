@@ -38,6 +38,7 @@ namespace OnlineStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             // ===== Add Jwt Authentication ========
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
@@ -91,6 +92,8 @@ namespace OnlineStore
             services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
             services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
             services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+            services.AddScoped<IOrderManipulator, OrderManipulator>();
+            services.AddScoped<IProductManipulator, ProductManipulator>();
            // services.AddScoped<IUserDbInitializer, UserDbInitializer>();
 
             // ===== Add Identity ========

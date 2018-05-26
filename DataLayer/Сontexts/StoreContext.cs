@@ -21,13 +21,17 @@ namespace DataLayer.Contexts
                 WithMany(c => c.Products).HasForeignKey(c => c.CategoryId);
 
             modelBuilder.Entity<ProductOrder>()
-           .HasKey(t => new { t.ProductId, t.OrderId });
+            .HasKey(t => t.Id);
 
-            modelBuilder.Entity<ProductOrder>().HasOne(c => c.Product).
-                WithMany(c => c.Orders).HasForeignKey(c => c.OrderId);
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(sc => sc.Order)
+                .WithMany(s => s.Products)
+                .HasForeignKey(sc => sc.OrderId);
 
-            modelBuilder.Entity<ProductOrder>().HasOne(c => c.Order).
-                WithMany(c => c.Products).HasForeignKey(c => c.ProductId);
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(sc => sc.Product)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(sc => sc.ProductId);
         }
     }
 }

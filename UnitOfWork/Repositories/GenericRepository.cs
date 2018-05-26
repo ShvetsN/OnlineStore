@@ -36,12 +36,13 @@ namespace UnitOfWork.Repositories
         public async Task<UnitEntity> ReadAsync(int id)
         {
             var item = await _context.Set<Entity>().FindAsync(id);
+            _context.Entry(item).State = EntityState.Detached;
             return _mapper.Map<UnitEntity>(item);
         }
 
         public async Task<IEnumerable<UnitEntity>> ReadAllAsync()
         {
-            var items = await _context.Set<Entity>().ToListAsync();
+            var items = await _context.Set<Entity>().AsNoTracking().ToListAsync();
             return _mapper.Map<IEnumerable<UnitEntity>>(items);
         }
 

@@ -12,8 +12,8 @@ using System;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20180523124839_StoreInitial")]
-    partial class StoreInitial
+    [Migration("20180526121700_Test2")]
+    partial class Test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,13 +76,18 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>
                 {
-                    b.Property<int>("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("OrderId");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductOrder");
                 });
@@ -97,13 +102,13 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>
                 {
-                    b.HasOne("DataLayer.Entities.Product", "Product")
-                        .WithMany("Orders")
+                    b.HasOne("DataLayer.Entities.Order", "Order")
+                        .WithMany("Products")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataLayer.Entities.Order", "Order")
-                        .WithMany("Products")
+                    b.HasOne("DataLayer.Entities.Product", "Product")
+                        .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

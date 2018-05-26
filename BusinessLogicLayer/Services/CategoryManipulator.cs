@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BusinessLogicLayer.Interfaces;
 using System.Threading.Tasks;
 using AutoMapper;
-using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using UnitOfWork.Interfaces;
 using UnitOfWork.Models;
 
-
 namespace BusinessLogicLayer.Services
 {
-    public class ProductManipulator : IProductManipulator
+    public class CategoryManipulator : ICategoryManipulator
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
-        public ProductManipulator(IUnitOfWork unitOfWork, IMapper mapper)
+        public CategoryManipulator(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _mapper = mapper;
         }
 
-        public async Task<bool> CreateProduct(ProductBLL product)
+        public async Task<bool> CreateCategory(CategoryBLL category)
         {
             try
             {
-                var item = _mapper.Map<UnitProduct>(product);
-                await _unitOfWork.Products.CreateAsync(item);
+                var item = _mapper.Map<UnitCategory>(category);
+                await _unitOfWork.Categories.CreateAsync(item);
                 await _unitOfWork.SaveAsync();
                 return true;
             }
@@ -37,12 +36,12 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<bool> UpdateProduct(ProductBLL updProduct)
+        public async Task<bool> UpdateCategory(CategoryBLL updCategory)
         {
             try
             {
-                var item = _mapper.Map<UnitProduct>(updProduct);
-                await _unitOfWork.Products.UpdateAsync(item);
+                var item = _mapper.Map<UnitCategory>(updCategory);
+                await _unitOfWork.Categories.UpdateAsync(item);
                 await _unitOfWork.SaveAsync();
                 return true;
             }
@@ -52,11 +51,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<bool> DeleteProduct(int id)
+        public async Task<bool> DeleteCategory(int id)
         {
             try
             {
-                await _unitOfWork.Products.DeleteAsync(id);
+                await _unitOfWork.Categories.DeleteAsync(id);
                 await _unitOfWork.SaveAsync();
                 return true;
             }
@@ -65,6 +64,5 @@ namespace BusinessLogicLayer.Services
                 return false;
             }
         }
-
     }
 }

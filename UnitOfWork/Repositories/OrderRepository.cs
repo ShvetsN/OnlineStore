@@ -19,13 +19,13 @@ namespace UnitOfWork.Repositories
 
         public async Task<UnitOrder> ReadWithProductsAsync(int id)
         {
-            var value = await _context.Orders.Include(c => c.Products).FirstOrDefaultAsync(o => o.Id == id);
+            var value = await _context.Orders.AsNoTracking().Include(c => c.Products).FirstOrDefaultAsync(o => o.Id == id);
             return _mapper.Map<UnitOrder>(value);
         }
 
         public async Task<IEnumerable<UnitOrder>> ReadAllWithProductsAsync()
         {
-            var values = await _context.Orders.Include(c => c.Products).ToListAsync();
+            var values = await _context.Orders.AsNoTracking().Include(c => c.Products).ToListAsync();
             return _mapper.Map<IEnumerable<UnitOrder>>(values);
         }
 

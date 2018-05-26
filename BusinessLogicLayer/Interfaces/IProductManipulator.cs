@@ -9,7 +9,7 @@ namespace BusinessLogicLayer.Interfaces
     public interface IProductManipulator
     {
         Task<bool> CreateProduct(ProductBLL product);
-        Task<bool> UpdateProduct(int id, ProductBLL updProduct);
-        Task<bool> DeleteProduct(int id);
+        Task<bool> UpdateProduct(ProductBLL updProduct);
+        Task<bool> DeleteProduct(int id);   
     }
 }
