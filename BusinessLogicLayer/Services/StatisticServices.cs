@@ -37,7 +37,5 @@ namespace BusinessLogicLayer.Services
             orders.Where(c => c.Products == prod).ToList();
             return orders.Count();
         }
-
-
     }
 }

@@ -6,8 +6,8 @@ namespace BusinessLogicLayer.Models
 {
     public enum OrderStateBLL
     {
-        InProcess,
         Canceled,
-        Confirmed,
+        InProcess,
+        Confirmed
     }
 }
