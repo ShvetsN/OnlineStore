@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using UnitOfWork.Interfaces;
+using System.Linq;
 
 namespace UnitOfWork.Repositories
 {
@@ -27,5 +28,11 @@ namespace UnitOfWork.Repositories
             var values = await _context.Orders.AsNoTracking().Include(c => c.Products).ToListAsync();
             return _mapper.Map<IEnumerable<UnitOrder>>(values);
         }
+
+     /*   public async Task DeclineOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            order.State = DataLayer.Entities.OrderState.Canceled;
+        }*/
     }
 }

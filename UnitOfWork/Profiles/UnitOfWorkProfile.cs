@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataLayer.Entities;
 using DataLayer.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace UnitOfWork.Profiles
 
             CreateMap<Product, UnitProduct>();
             CreateMap<UnitProduct, Product>();
+
         }
     }
 }

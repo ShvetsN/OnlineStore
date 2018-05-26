@@ -13,7 +13,6 @@ namespace OnlineStore.Controllers
 {
     public class IdentityController: Controller
     {
-       // UnitOfWorkPattern _unitOfWorkPattern;
         IIdentityService _userServices;
 
         public IdentityController(IIdentityService userServices)
@@ -40,6 +39,5 @@ namespace OnlineStore.Controllers
                 BadRequest();
             return Ok(token);
         }
-
     }
 }

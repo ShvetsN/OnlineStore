@@ -38,24 +38,6 @@ namespace OnlineStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStore")));
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
-            services.AddScoped<IIdentityService, IdentityServices>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
-            services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
-            services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
-            services.AddScoped<IOrderManipulator, OrderManipulator>();
-            services.AddScoped<IProductManipulator, ProductManipulator>();
-
-            // ===== Add Identity ========
-
-            services.AddIdentity<User, UserRole>()
-                .AddEntityFrameworkStores<UserContext>()
-                .AddDefaultTokenProviders();
-
-
 
             // ===== Add Jwt Authentication ========
 
@@ -72,8 +54,6 @@ namespace OnlineStore
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-
 
                 })
 
@@ -100,6 +80,26 @@ namespace OnlineStore
                     };
 
                 });
+
+            services.AddAutoMapper();
+            DataLayer.Configuration.Configuration.Configure(services, Configuration);
+           // services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStore")));
+            //services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
+            services.AddScoped<IIdentityService, IdentityServices>();
+            services.AddScoped<IStatisticService, StatisticServices>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
+            services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
+            services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+            services.AddScoped<IOrderManipulator, OrderManipulator>();
+            services.AddScoped<IProductManipulator, ProductManipulator>();
+           // services.AddScoped<IUserDbInitializer, UserDbInitializer>();
+
+            // ===== Add Identity ========
+
+
+            
             services.AddMvc();
         }
 

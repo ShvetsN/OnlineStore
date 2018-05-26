@@ -93,7 +93,9 @@ namespace BusinessLogicLayer.Services
          * Return collection of non-repeating products with updated amount
          * If there're not enough amount at any product return null 
          */
+
         internal protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
+
         {
             var order = await _unitOfWork.Orders.ReadWithProductsAsync(id);
 

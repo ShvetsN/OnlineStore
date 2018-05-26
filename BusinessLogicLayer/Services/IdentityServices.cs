@@ -32,9 +32,8 @@ namespace BusinessLogicLayer.Services
             }
             catch (Exception e)
             {
-                e.GetBaseException();
-            }
-            return null;
+                return null;
+            }    
         }
 
         public async Task<string> Registrate(RegistrationUserBLL registrationUser)
@@ -46,9 +45,8 @@ namespace BusinessLogicLayer.Services
             }
             catch (Exception e)
             {
-                e.GetBaseException();
+                return null;
             }
-            return null;
         }
     }
 }
