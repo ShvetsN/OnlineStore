@@ -68,7 +68,7 @@ namespace OnlineStore.Controllers
         [HttpGet("order/confirm")]
         public async Task<IActionResult> ConfirmOrder()
         {
-            await _ordManplr.Process(2, true);
+            await _ordManplr.Process(4, true);
 
             return new ObjectResult("Success");
         }

@@ -6,8 +6,8 @@ namespace DataLayer.Entities
 {
     public enum OrderState
     {
-        Confirmed,
+        Canceled,
         InProcess,
-        Canceled
+        Confirmed
     }
 }
