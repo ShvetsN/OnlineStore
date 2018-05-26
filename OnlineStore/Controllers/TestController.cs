@@ -12,12 +12,12 @@ namespace OnlineStore.Controllers
 {
     [Produces("application/json")]
     [Route("api/test")]
-    public class UserController : Controller
+    public class TestController : Controller
     {
         IOrderManipulator _ordManplr;
         IMapper _mapper;
         IProductManipulator _prdManplr;
-        public UserController(IOrderManipulator ord, IMapper mapper, IProductManipulator prd)
+        public TestController(IOrderManipulator ord, IMapper mapper, IProductManipulator prd)
         {
             _ordManplr = ord;
             _mapper = mapper;
@@ -61,6 +61,14 @@ namespace OnlineStore.Controllers
         public async Task<IActionResult> DeleteProduct()
         {
             await _prdManplr.DeleteProduct(6);
+
+            return new ObjectResult("Success");
+        }
+
+        [HttpGet("order/confirm")]
+        public async Task<IActionResult> ConfirmOrder()
+        {
+            await _ordManplr.Process(2, true);
 
             return new ObjectResult("Success");
         }

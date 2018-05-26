@@ -19,20 +19,28 @@ namespace UnitOfWork.Repositories
 
         public async Task<UnitOrder> ReadWithProductsAsync(int id)
         {
-            var value = await _context.Orders.AsNoTracking().Include(c => c.Products).FirstOrDefaultAsync(o => o.Id == id);
+            var value = await _context.Orders.AsNoTracking().Include(c => c.Products).ThenInclude(p => p.Product).FirstOrDefaultAsync(o => o.Id == id);
             return _mapper.Map<UnitOrder>(value);
         }
 
         public async Task<IEnumerable<UnitOrder>> ReadAllWithProductsAsync()
         {
-            var values = await _context.Orders.AsNoTracking().Include(c => c.Products).ToListAsync();
+            var values = await _context.Orders.AsNoTracking().Include(c => c.Products).ThenInclude(p => p.Product).ToListAsync();
             return _mapper.Map<IEnumerable<UnitOrder>>(values);
         }
 
-     /*   public async Task DeclineOrder(int id)
+        public async Task AcceptOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            order.State = DataLayer.Entities.OrderState.Confirmed;
+            _context.Entry(order).State = EntityState.Modified;
+        }
+
+        public async Task DeclineOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);
             order.State = DataLayer.Entities.OrderState.Canceled;
-        }*/
+            _context.Entry(order).State = EntityState.Modified;
+        }
     }
 }

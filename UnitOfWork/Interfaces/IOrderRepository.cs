@@ -11,5 +11,7 @@ namespace UnitOfWork.Interfaces
     {
         Task<IEnumerable<UnitOrder>> ReadAllWithProductsAsync();
         Task<UnitOrder> ReadWithProductsAsync(int id);
+        Task AcceptOrder(int id);
+        Task DeclineOrder(int id);
     }
 }

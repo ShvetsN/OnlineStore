@@ -59,6 +59,10 @@ namespace BusinessLogicLayer.Services
         {   
             try
             {
+                var order = await _unitOfWork.Orders.ReadAsync(id);
+
+                if (order.State != OrderState.InProcess) return false;
+
                 if (confirmed)
                 {
                     var products = await DecreaseAmountIfValid(id);
@@ -68,17 +72,19 @@ namespace BusinessLogicLayer.Services
                         {
                             await _unitOfWork.Products.UpdateAsync(product);
                         }
-                        //await _unitOfWork.Orders.AcceptOrder(id);
+                        await _unitOfWork.Orders.AcceptOrder(id);
                     }
                     else
                     {
-                        //await _unitOfWork.Orders.DeclineOrder(id);
+                        await _unitOfWork.Orders.DeclineOrder(id);
                     }
                 }
                 else
                 {
-                    //await _unitOfWork.Orders.DeclineOrder(id);
+                    await _unitOfWork.Orders.DeclineOrder(id);
                 }
+
+                await _unitOfWork.SaveAsync();
                 return true;
             }
             catch (Exception)
