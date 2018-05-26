@@ -16,6 +16,9 @@ namespace OnlineStore.Profiles
 
             CreateMap<ProductOrderModel, ProductOrderBLL>();
             CreateMap<ProductOrderBLL, ProductOrderModel>();
+
+            CreateMap<TypeOfDeliveryBLL, TypeOfDeliveryModel>();
+            CreateMap<TypeOfDeliveryModel, TypeOfDeliveryBLL>();
         }
     }
 }
