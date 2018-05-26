@@ -30,17 +30,23 @@ namespace BusinessLogicLayer.Services
          */
         public async Task<bool> CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
         {
+            if (products == null)
+            {
+                return false;
+            }
             try
             {
                 OrderBLL order = new OrderBLL { CustomerId = customerId, DeliveryType = deliveryType, Date = DateTime.Now };
-
                 foreach (int a in products)
                 {
-                    order.ProductOrders.Add(new ProductOrderBLL { ProductId = a });
+                    order.Products.Add(new ProductOrderBLL { ProductId = a });
                 }
 
                 var unitOrder = _mapper.Map<UnitOrder>(order);
+
                 await _unitOfWork.Orders.CreateAsync(unitOrder);
+                await _unitOfWork.SaveAsync();
+
                 return true;
             }
             catch (Exception)
@@ -89,7 +95,6 @@ namespace BusinessLogicLayer.Services
          */
         internal protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
         {
-            //var item = Mapper.Map<OrderBLL>(_unitOfWork.Orders.ReadAsync(id));
             var order = await _unitOfWork.Orders.ReadWithProductsAsync(id);
 
             var resProds = new List<UnitProduct>();

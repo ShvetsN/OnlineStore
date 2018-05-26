@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataLayer.Migrations
 {
-    public partial class StoreInitial : Migration
+    public partial class Test2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,22 +65,24 @@ namespace DataLayer.Migrations
                 name: "ProductOrder",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false),
-                    OrderId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductOrder", x => new { x.ProductId, x.OrderId });
+                    table.PrimaryKey("PK_ProductOrder", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductOrder_Product_OrderId",
+                        name: "FK_ProductOrder_Orders_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Product",
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductOrder_Orders_ProductId",
+                        name: "FK_ProductOrder_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Orders",
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -94,6 +96,11 @@ namespace DataLayer.Migrations
                 name: "IX_ProductOrder_OrderId",
                 table: "ProductOrder",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrder_ProductId",
+                table: "ProductOrder",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -102,10 +109,10 @@ namespace DataLayer.Migrations
                 name: "ProductOrder");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Category");

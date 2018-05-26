@@ -43,9 +43,11 @@ namespace OnlineStore
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineStoreUsers")));
             services.AddScoped<IIdentityService, IdentityServices>();
             services.AddScoped<IOrderRepository, OrderRepository>();
-            //services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
+            services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
+            services.AddScoped<IUnitOfWork, UnitOfWorkPattern>();
             services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
-
+            services.AddScoped<IOrderManipulator, OrderManipulator>();
+            services.AddScoped<IProductManipulator, ProductManipulator>();
 
             // ===== Add Identity ========
 

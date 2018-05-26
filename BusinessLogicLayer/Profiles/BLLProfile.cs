@@ -11,8 +11,14 @@ namespace BusinessLogicLayer.Profiles
     {
         public BLLProfile()
         {
-            CreateMap<UnitOrder, OrderBLL>();
             CreateMap<UnitProduct, ProductBLL>();
+            CreateMap<ProductBLL, UnitProduct>();
+
+            CreateMap<UnitOrder, OrderBLL>();
+            CreateMap<OrderBLL, UnitOrder>();
+
+            CreateMap<UnitProductOrder, ProductOrderBLL>();
+            CreateMap<ProductOrderBLL, UnitProductOrder>();
         }
     }
 }

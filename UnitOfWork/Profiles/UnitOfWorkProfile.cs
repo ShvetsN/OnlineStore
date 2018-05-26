@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnitOfWork.Models;
+using DataLayer.Entities;
 
 namespace UnitOfWork.Profiles
 {
@@ -12,6 +13,15 @@ namespace UnitOfWork.Profiles
         public UnitOfWorkProfile()
         {
             CreateMap<RegistrationUser, User>().ReverseMap();
+
+            CreateMap<UnitOrder, Order>();
+            CreateMap<Order, UnitOrder>();
+
+            CreateMap<ProductOrder, UnitProductOrder>();
+            CreateMap<UnitProductOrder, ProductOrder>();
+
+            CreateMap<Product, UnitProduct>();
+            CreateMap<UnitProduct, Product>();
         }
     }
 }

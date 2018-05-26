@@ -75,13 +75,18 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>
                 {
-                    b.Property<int>("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("OrderId");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductOrder");
                 });
@@ -96,13 +101,13 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>
                 {
-                    b.HasOne("DataLayer.Entities.Product", "Product")
-                        .WithMany("Orders")
+                    b.HasOne("DataLayer.Entities.Order", "Order")
+                        .WithMany("Products")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataLayer.Entities.Order", "Order")
-                        .WithMany("Products")
+                    b.HasOne("DataLayer.Entities.Product", "Product")
+                        .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
