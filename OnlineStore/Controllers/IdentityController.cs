@@ -7,15 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnitOfWork.Models;
-using UnitOfWork.UnitOfWork;
 using AutoMapper;
 
 namespace OnlineStore.Controllers
 {
     public class IdentityController: Controller
     {
-        IIdentityService _userServices;
+        private readonly IIdentityService _userServices;
         IMapper _mapper;
 
         public IdentityController(IIdentityService userServices, IMapper mapper)
