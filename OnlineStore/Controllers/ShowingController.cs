@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineStore.Controllers
 {
-    public class ShowingController
+    public class ShowingController :Controller
     {
         private readonly IShowing _showingController;
         IMapper _mapper;
@@ -32,6 +32,44 @@ namespace OnlineStore.Controllers
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
+            else
+                return BadRequest(res);
+        }
+
+        [HttpGet]
+        [Route("api/showing/getcategory")]
+        public async Task<IActionResult> GetCategory([FromBody] string category)
+        {
+            var result = await _showingController.GetForCategory(category);
+            var res = _mapper.Map<IEnumerable<ProductModel>>(result);
+            if (result != null)
+                return Ok(res);
+            else
+                return BadRequest(res);
+        }
+
+        [HttpGet]
+        [Route("api/showing/search")]
+        public async Task<IActionResult> Search([FromBody] string request)
+        {
+            var result = await _showingController.Search(request);
+            var res = _mapper.Map<IEnumerable<ProductModel>>(result);
+            if (result != null)
+                return Ok(res);
+            else
+                return BadRequest(res);
+        }
+
+        [HttpGet]
+        [Route("api/showing/filter")]
+        public async Task<IActionResult> Filter([FromBody] int min, [FromBody] int max)
+        {
+            var result = await _showingController.GetFilter(min, max);
+            var res = _mapper.Map<IEnumerable<ProductModel>>(result);
+            if (result != null)
+                return Ok(res);
+            else
+                return BadRequest(res);
         }
     }
 }
