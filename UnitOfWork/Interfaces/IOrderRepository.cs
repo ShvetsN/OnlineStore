@@ -10,5 +10,6 @@ namespace UnitOfWork.Interfaces
     public interface IOrderRepository : IRepository<Order,UnitOrder>
     {
         Task<IEnumerable<UnitOrder>> ReadAllWithProductsAsync();
+        Task<UnitOrder> ReadWithProductsAsync(int id);
     }
 }
