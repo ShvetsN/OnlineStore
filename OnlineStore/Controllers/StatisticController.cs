@@ -15,10 +15,12 @@ namespace OnlineStore.Controllers
     public class StatisticController: Controller
     {
         private readonly IStatisticService _statisticService;
+        
 
         public StatisticController(IStatisticService statisticService)
         {
             _statisticService = statisticService;
+            
         }
 
         [HttpGet]
