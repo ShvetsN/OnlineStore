@@ -22,6 +22,8 @@ namespace OnlineStore.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost]
+        [Route("api/category/create")]
         public async Task<IActionResult> Create([FromBody] CategoryModel category)
         {
             var result = await _categoryManipulator.CreateCategory(_mapper.Map<CategoryBLL>(category));
@@ -31,9 +33,22 @@ namespace OnlineStore.Controllers
                 return BadRequest(result);
         }
 
+        [HttpPut]
+        [Route("api/category/update")]
         public async Task<IActionResult> Update([FromBody] CategoryModel category)
         {
             var result = await _categoryManipulator.UpdateCategory(_mapper.Map<CategoryBLL>(category));
+            if (result)
+                return Ok(result);
+            else
+                return BadRequest(result);
+        }
+
+        [HttpDelete]
+        [Route("api/category/delete")]
+        public async Task<IActionResult> Delete([FromBody] int id)
+        {
+            var result = await _categoryManipulator.DeleteCategory(id);
             if (result)
                 return Ok(result);
             else
