@@ -16,6 +16,6 @@ namespace UnitOfWork.Models
 
         public OrderState State { get; set; }
 
-        public ICollection<UnitProduct> Products { get; set; }
+        public ICollection<UnitProductOrder> Products { get; set; }
     }
 }

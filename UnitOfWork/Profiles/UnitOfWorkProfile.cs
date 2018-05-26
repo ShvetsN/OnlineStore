@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataLayer.Entities;
 using DataLayer.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace UnitOfWork.Profiles
         public UnitOfWorkProfile()
         {
             CreateMap<RegistrationUser, User>().ReverseMap();
+            CreateMap<UnitOrder,Order>().ReverseMap();
+            CreateMap<UnitProduct, Product>().ReverseMap();
         }
     }
 }

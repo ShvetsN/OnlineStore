@@ -12,22 +12,22 @@ using UnitOfWork.Models;
 namespace BusinessLogicLayer.Services
 {
 
-    public class OrderManipulator : IOrderManipulator
+    public class OrderManipulator // : IOrderManipulator
     {
-        IUnitOfWork _unitOfWork;
+        /*IUnitOfWork _unitOfWork;
         IMapper _mapper;
         public OrderManipulator(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }
+        }*/
 
         /**
          * ATTENTION!ATTENTION!ATTENTION! 
          * We could just use UnitOrder without OrderBLL and mapping but rusik13312 is a person without even rating on github
          * 
          */
-        public async Task<bool> CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
+      /*  public async Task<bool> CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace BusinessLogicLayer.Services
             {
                 return false;
             }
-        }
+        }*/
 
 
         /**
@@ -87,7 +87,7 @@ namespace BusinessLogicLayer.Services
          * Return collection of non-repeating products with updated amount
          * If there're not enough amount at any product return null 
          */
-        protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
+     /*   protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)
         {
             //var item = Mapper.Map<OrderBLL>(_unitOfWork.Orders.ReadAsync(id));
             var order = await _unitOfWork.Orders.ReadAsync(id);
@@ -110,6 +110,6 @@ namespace BusinessLogicLayer.Services
             }           
 
             return resProds;
-        }
+        }*/
     }
 }

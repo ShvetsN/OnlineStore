@@ -11,7 +11,7 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class ProductManipulator //: IProductManipulator
+    public class ProductManipulator: IProductManipulator
     {
         IUnitOfWork _unitOfWork;
         IMapper _mapper;
@@ -21,11 +21,11 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-      /*  public Task<bool> CreateProduct(ProductBLL product)
+        public Task<bool> CreateProduct(ProductBLL product)
         {
             try
             {
-
+                return null;
             }
             catch (Exception)
             {
@@ -42,7 +42,6 @@ namespace BusinessLogicLayer.Services
         {
             throw new NotImplementedException();
         }
-        */
         
     }
 }

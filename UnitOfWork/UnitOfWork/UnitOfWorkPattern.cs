@@ -15,11 +15,11 @@ namespace UnitOfWork.UnitOfWork
 
         private readonly IOrderRepository _order;
 
-        private readonly IRepository<Product, UnitProduct> _products;
+        private readonly IProductRepository _products;
 
         private readonly IRepository<Category, UnitCategory> _categories;
 
-        public UnitOfWorkPattern(StoreContext context, IOrderRepository orders, IRepository<Product, UnitProduct> products,
+        public UnitOfWorkPattern(StoreContext context, IOrderRepository orders, IProductRepository products,
                      IRepository<Category, UnitCategory> categories )
         {
             _context = context;
@@ -36,7 +36,7 @@ namespace UnitOfWork.UnitOfWork
             }
         }
 
-        public IRepository<Product, UnitProduct> Products
+        public IProductRepository Products
         {
             get
             {
