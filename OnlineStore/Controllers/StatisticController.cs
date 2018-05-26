@@ -8,6 +8,7 @@ using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineStore.Models;
 
 namespace OnlineStore.Controllers
 {
@@ -15,12 +16,12 @@ namespace OnlineStore.Controllers
     public class StatisticController: Controller
     {
         private readonly IStatisticService _statisticService;
-        
+        IMapper _mapper;
 
-        public StatisticController(IStatisticService statisticService)
+        public StatisticController(IStatisticService statisticService, IMapper mapper)
         {
             _statisticService = statisticService;
-            
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,13 +35,9 @@ namespace OnlineStore.Controllers
 
         [HttpGet]
         [Route("/api/stati")]
-        public async Task<IActionResult> Stat()
+        public async Task<IActionResult> Stat(ProductModel product)
         {
-            ProductBLL product = new ProductBLL
-            {
-                Id = 1
-            };
-            var result = await _statisticService.GetAmountOfSpecialProductsInOrders(product);
+            var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
             return Ok(result);
         }
     }
