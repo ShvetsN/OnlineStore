@@ -73,7 +73,7 @@ namespace UnitOfWork.UnitOfWork
             throw new ApplicationException("REGISTRATION ERROR");
         }
 
-        public Task<string> GenerateToken(User user)
+        public async Task<string> GenerateToken(User user)
         {
             var claims = new List<Claim>
 
@@ -85,11 +85,11 @@ namespace UnitOfWork.UnitOfWork
 
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
 
-                //new Claim(ClaimTypes.Role, user.Role.Name)
-
             };
 
-
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+                claims.Add(new Claim(ClaimTypes.Role, role));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
 
@@ -115,7 +115,7 @@ namespace UnitOfWork.UnitOfWork
 
 
 
-            return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

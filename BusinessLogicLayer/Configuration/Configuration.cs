@@ -12,8 +12,11 @@ namespace BusinessLogicLayer.Configuration
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-           /* services.AddScoped<IOrderManipulator, OrderManipulator>();
-            services.AddScoped<IProductManipulator, ProductManipulator>();*/
+            services.AddScoped<IOrderManipulator, OrderManipulator>();
+            services.AddScoped<IProductManipulator, ProductManipulator>();
+            services.AddScoped<IIdentityService, IdentityServices>();
+            services.AddScoped<IStatisticService, StatisticServices>();
+            UnitOfWork.Configuration.Configuration.Configure(services, configuration);
         }
     }
 }
