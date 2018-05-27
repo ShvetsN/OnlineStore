@@ -37,10 +37,10 @@ namespace OnlineStore.Controllers
         }
 
         [HttpGet]
-        [Route("api/showing/getcategory")]
-        public async Task<IActionResult> GetCategory([FromBody] string category)
+        [Route("api/showing/getcategory/{id}")]
+        public async Task<IActionResult> GetCategory(int id)
         {
-            var result = await _showingController.GetForCategory(category);
+            var result = await _showingController.GetForCategory(id);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
@@ -49,8 +49,8 @@ namespace OnlineStore.Controllers
         }
 
         [HttpGet]
-        [Route("api/showing/search")]
-        public async Task<IActionResult> Search([FromBody] string request)
+        [Route("api/showing/search/{request}")]
+        public async Task<IActionResult> Search(string request)
         {
             var result = await _showingController.Search(request);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);

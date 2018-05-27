@@ -138,7 +138,7 @@ namespace XUnitTestProject
                 Products = productOrders
             };
             
-            return order;   
+            return order;
         }
 
         private async Task<IEnumerable<UnitProduct>> GetUpdatedProducts()
@@ -170,14 +170,39 @@ namespace XUnitTestProject
 
         #region Process_MethodTest
         [Fact]
-        public void Process_NormalValues_TrueAndUpdatedProducts()
+        public async void Process_NormalValues_TrueAndUpdatedProducts()
         {
             //Arrange
-            
+            _uof.Setup(p => p.Orders.ReadWithProductsAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+            _uof.Setup(p => p.Orders.ReadAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+
+            var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
 
             //Act
+            var result = await manipulator.DecreaseAmountIfValid(1) as List<UnitProduct>;
 
             //Assert
+            Assert.Null(result);
+        }
+        [Fact]
+        public async void Process_ConfirmedOrder_ReturnFalse()
+        {
+            //Arrange
+            _uof.Setup(p => p.Orders.ReadAsync(id)(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+
+            var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
+
+            //Act
+            var expected = false;
+            var result = await manipulator.Process(1, true);
+
+            //Assert
+            Assert.Equal(result, expected);
+        }
+
+        private async Task<UnitOrder> GetConfirmedUnitOrder()
+        {
+            return new UnitOrder { State = OrderState.Confirmed };
         }
         #endregion
 

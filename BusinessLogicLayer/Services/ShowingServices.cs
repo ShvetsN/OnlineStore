@@ -35,12 +35,12 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<IEnumerable<ProductBLL>> GetForCategory(string category)
+        public async Task<IEnumerable<ProductBLL>> GetForCategory(int categoryId)
         {
             try
             {
-                var products = await _unitOfWork.Products.ReadAllAsync();
-               return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Category.Name == category));
+               var products = await _unitOfWork.Products.ReadAllAsync();
+               return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.CategoryId == categoryId));
             }
             catch (Exception)
             {
@@ -53,7 +53,7 @@ namespace BusinessLogicLayer.Services
             try
             {
                 var products = await _unitOfWork.Products.ReadAllAsync();
-                return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Name.Contains(request)));
+                return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Name.Equals(request, StringComparison.OrdinalIgnoreCase)));
             }
             catch (Exception)
             {

@@ -26,7 +26,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        [Route("api/produtc/create")]
+        [Route("api/product/create")]
         public async Task<IActionResult> Create([FromBody] ProductModel product)
         {
             var result = await _productManipulator.CreateProduct(_mapper.Map<ProductBLL>(product));
