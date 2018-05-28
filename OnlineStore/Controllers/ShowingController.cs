@@ -15,12 +15,12 @@ namespace OnlineStore.Controllers
 {
     public class ShowingController :Controller
     {
-        private readonly IShowing _showingController;
+        private readonly IShowing _showingService;
         IMapper _mapper;
 
-        public ShowingController(IShowing showingController, IMapper mapper)
+        public ShowingController(IShowing showingService, IMapper mapper)
         {
-            _showingController = showingController;
+            _showingService = showingService;
             _mapper = mapper;
         }
 
@@ -28,7 +28,7 @@ namespace OnlineStore.Controllers
         [Route("api/showing/getall")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _showingController.GetAll();
+            var result = await _showingService.GetAll();
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
@@ -40,7 +40,7 @@ namespace OnlineStore.Controllers
         [Route("api/showing/getcategory/{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var result = await _showingController.GetForCategory(id);
+            var result = await _showingService.GetForCategory(id);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
@@ -52,7 +52,7 @@ namespace OnlineStore.Controllers
         [Route("api/showing/search/{request}")]
         public async Task<IActionResult> Search(string request)
         {
-            var result = await _showingController.Search(request);
+            var result = await _showingService.Search(request);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
@@ -64,7 +64,7 @@ namespace OnlineStore.Controllers
         [Route("api/showing/filter")]
         public async Task<IActionResult> Filter([FromBody] int min, [FromBody] int max)
         {
-            var result = await _showingController.GetFilter(min, max);
+            var result = await _showingService.GetFilter(min, max);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
             if (result != null)
                 return Ok(res);
