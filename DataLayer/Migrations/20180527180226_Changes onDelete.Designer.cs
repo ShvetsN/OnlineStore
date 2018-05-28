@@ -12,8 +12,8 @@ using System;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20180526121700_Test2")]
-    partial class Test2
+    [Migration("20180527180226_Changes onDelete")]
+    partial class ChangesonDelete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,7 +97,7 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>

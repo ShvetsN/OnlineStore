@@ -31,7 +31,7 @@ namespace BusinessLogicLayer.Services
                 await _unitOfWork.SaveAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

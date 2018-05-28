@@ -26,7 +26,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        [Route("api/category/create")]
+        [Route("/api/category/create")]
         public async Task<IActionResult> Create([FromBody] CategoryModel category)
         {
             var result = await _categoryManipulator.CreateCategory(_mapper.Map<CategoryBLL>(category));
@@ -49,7 +49,7 @@ namespace OnlineStore.Controllers
 
         [HttpDelete]
         [Route("api/category/delete")]
-        public async Task<IActionResult> Delete([FromBody] int id)
+        public async Task<IActionResult> Delete([FromQuery] int id)
         {
             var result = await _categoryManipulator.DeleteCategory(id);
             if (result)

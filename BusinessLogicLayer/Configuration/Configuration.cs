@@ -17,6 +17,7 @@ namespace BusinessLogicLayer.Configuration
             services.AddScoped<IIdentityService, IdentityServices>();
             services.AddScoped<IStatisticService, StatisticServices>();
             services.AddScoped<IShowing, ShowingServices>();
+            services.AddScoped<ICategoryManipulator, CategoryManipulator>();
             UnitOfWork.Configuration.Configuration.Configure(services, configuration);
         }
     }

@@ -26,7 +26,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        [Route("api/produtc/create")]
+        [Route("/api/produtc/create")]
         public async Task<IActionResult> Create([FromBody] ProductModel product)
         {
             var result = await _productManipulator.CreateProduct(_mapper.Map<ProductBLL>(product));
@@ -37,7 +37,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPut]
-        [Route("api/product/update")]
+        [Route("/api/product/update")]
         public async Task<IActionResult> Update([FromBody] ProductModel product)
         {
             var result = await _productManipulator.UpdateProduct(_mapper.Map<ProductBLL>(product));
@@ -48,7 +48,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpDelete]
-        [Route("api/product/delete")]
+        [Route("/api/product/delete")]
         public async Task<IActionResult> Delete([FromBody] int id)
         {
             var result = await _productManipulator.DeleteProduct(id);

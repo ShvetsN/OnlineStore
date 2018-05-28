@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Interfaces
 {
-    interface IShowing
+    public interface IShowing
     {
         Task<IEnumerable<ProductBLL>> GetAll();
         Task<IEnumerable<ProductBLL>> GetForCategory(string category);

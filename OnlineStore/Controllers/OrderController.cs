@@ -38,7 +38,7 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPut]
-        [Route("api/order/process")]
+        [Route("/api/order/process")]
         public async Task<IActionResult> Process([FromBody]int id, [FromBody] bool confirmed)
         {
             var result = await _orderManipulator.Process(id, confirmed);

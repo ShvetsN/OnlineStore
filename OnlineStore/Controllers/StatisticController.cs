@@ -25,17 +25,16 @@ namespace OnlineStore.Controllers
         }
 
         [HttpGet]
-        [Route("/api/stat")]
-        public async Task<IActionResult> Statistic()
+        [Route("/api/statistic/specialday")]
+        public async Task<IActionResult> Statistic([FromQuery] DateTime date)
         {
-            DateTime date = DateTime.Today;
             var result = await _statisticService.GetOrdersOfSpecialDay(date);
             return Ok(result);
         }
 
         [HttpGet]
-        [Route("/api/stati")]
-        public async Task<IActionResult> Stat([FromBody] ProductModel product)
+        [Route("/api/statistic/products")]
+        public async Task<IActionResult> Stat([FromQuery] ProductModel product)
         {
             var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
             return Ok(result);

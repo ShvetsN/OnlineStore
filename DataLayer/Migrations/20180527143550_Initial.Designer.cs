@@ -12,9 +12,10 @@ using System;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20180527143550_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +59,7 @@ namespace DataLayer.Migrations
 
                     b.Property<int>("Amount");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Name");
 
@@ -96,7 +97,7 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.ProductOrder", b =>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataLayer.Migrations
 {
-    public partial class Test2 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
