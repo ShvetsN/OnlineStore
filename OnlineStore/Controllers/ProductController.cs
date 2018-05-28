@@ -29,22 +29,32 @@ namespace OnlineStore.Controllers
         [Route("api/product/create")]
         public async Task<IActionResult> Create([FromBody] ProductModel product)
         {
-            var result = await _productManipulator.CreateProduct(_mapper.Map<ProductBLL>(product));
-            if (result)
-                return Ok(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _productManipulator.CreateProduct(_mapper.Map<ProductBLL>(product));
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest(result);
+            }
             else
-                return BadRequest(result);
+                return BadRequest();
         }
 
         [HttpPut]
         [Route("api/product/update")]
         public async Task<IActionResult> Update([FromBody] ProductModel product)
         {
-            var result = await _productManipulator.UpdateProduct(_mapper.Map<ProductBLL>(product));
+            if (ModelState.IsValid)
+            {
+                var result = await _productManipulator.UpdateProduct(_mapper.Map<ProductBLL>(product));
             if (result)
                 return Ok(result);
             else
                 return BadRequest(result);
+            }
+            else
+                return BadRequest();
         }
 
         [HttpDelete]

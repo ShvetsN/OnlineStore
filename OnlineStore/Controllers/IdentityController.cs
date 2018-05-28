@@ -26,21 +26,29 @@ namespace OnlineStore.Controllers
         [Route("api/registrate")]
         public async Task<IActionResult> Registration([FromBody] RegistrationUserModel user)
         {
-            
-            var token = await _userServices.Registrate(_mapper.Map<RegistrationUserBLL>(user));
-            if ( token == null)
-                BadRequest();
-            return Ok(token);
+            if (ModelState.IsValid)
+            {
+                var token = await _userServices.Registrate(_mapper.Map<RegistrationUserBLL>(user));
+                if (token == null)
+                    BadRequest();
+                return Ok(token);
+            }
+            else
+                return BadRequest();
         }
 
         [HttpPost]
         [Route("api/login")]
         public async Task<IActionResult> Login([FromBody] LoginUserModel user) 
         {
-            var token = await _userServices.Login(_mapper.Map<LoginUserBLL>(user));
-            if (token == null)
-                BadRequest();
-            return Ok(token);
+            if (ModelState.IsValid)
+            {
+                var token = await _userServices.Login(_mapper.Map<LoginUserBLL>(user));
+                if (token == null)
+                    BadRequest();
+                return Ok(token);
+            }
+            else return BadRequest();
         }
     }
 }

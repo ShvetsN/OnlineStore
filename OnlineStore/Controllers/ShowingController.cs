@@ -61,8 +61,8 @@ namespace OnlineStore.Controllers
         }
 
         [HttpGet]
-        [Route("api/showing/filter")]
-        public async Task<IActionResult> Filter([FromBody] int min, [FromBody] int max)
+        [Route("api/showing/filter/{min}/{max}")]
+        public async Task<IActionResult> Filter( int min, int max)
         {
             var result = await _showingService.GetFilter(min, max);
             var res = _mapper.Map<IEnumerable<ProductModel>>(result);
