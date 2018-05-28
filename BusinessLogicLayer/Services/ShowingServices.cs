@@ -28,12 +28,12 @@ namespace BusinessLogicLayer.Services
             {
                 var products = await _unitOfWork.Products.ReadAllAsync();
                 return _mapper.Map<IEnumerable<ProductBLL>>(products);
-            }
+        }
             catch (Exception)
             {
                 return null;
             }
-        }
+}
 
         public async Task<IEnumerable<ProductBLL>> GetForCategory(int categoryId)
         {

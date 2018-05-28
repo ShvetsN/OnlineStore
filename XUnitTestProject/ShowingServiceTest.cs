@@ -28,7 +28,7 @@ namespace XUnitTestProject
         {
             //Arrange
             _uof.Setup(p => p.Products.ReadAllAsync()).ReturnsAsync(await GetAllProducts());
-            
+            _mapper.Setup(m => m.Map<UnitProduct, ProductBLL>(It.IsAny<UnitProduct>())).Returns(new ProductBLL());
             //Act
             var result = await _service.GetAll() as List<ProductBLL>;
 
