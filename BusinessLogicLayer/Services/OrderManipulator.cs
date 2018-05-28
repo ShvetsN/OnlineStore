@@ -23,6 +23,11 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
+        public void Test_Method()
+        {
+            _unitOfWork.Orders.ReadAsync(1);
+            _unitOfWork.Orders.AcceptOrder(1);
+        }
         /**
          * ATTENTION!ATTENTION!ATTENTION! 
          * We could just use UnitOrder without OrderBLL and mapping but rusik13312 is a person without even rating on github
@@ -53,7 +58,7 @@ namespace BusinessLogicLayer.Services
             {
                 return false;
             }
-        }
+}
 
         public async Task<bool> Process(int id, bool confirmed)
         {   
@@ -97,7 +102,7 @@ namespace BusinessLogicLayer.Services
         /**
          * Get all products in order
          * Return collection of non-repeating products with updated amount
-         * If there're not enough amount at any product return null 
+         * If there're not enough amount at any product returns null 
          */
 
         internal protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)

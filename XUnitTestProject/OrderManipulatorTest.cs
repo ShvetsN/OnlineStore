@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UnitOfWork.Interfaces;
 using UnitOfWork.Models;
 using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Models;
 using AutoMapper;
 using Xunit;
 using Moq;
@@ -135,6 +136,7 @@ namespace XUnitTestProject
             {
                 Id = 1,
                 CustomerId = 1,
+                State = OrderState.InProcess,
                 Products = productOrders
             };
             
@@ -175,23 +177,29 @@ namespace XUnitTestProject
             //Arrange
             _uof.Setup(p => p.Orders.ReadWithProductsAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
             _uof.Setup(p => p.Orders.ReadAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+            _uof.Setup(p => p.Products.UpdateAsync(It.IsAny<UnitProduct>())).Returns(Task.CompletedTask);
+            _uof.Setup(p => p.Orders.AcceptOrder(It.IsAny<int>())).Returns(Task.CompletedTask);
+            _uof.Setup(p => p.SaveAsync()).Returns(Task.CompletedTask);
 
             var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
 
             //Act
-            var result = await manipulator.DecreaseAmountIfValid(1) as List<UnitProduct>;
+            var expected = true;
+            var result = await manipulator.Process(1, true);
+
 
             //Assert
-            Assert.Null(result);
+            _uof.VerifyAll();
+            Assert.Equal(expected, result);
         }
         [Fact]
         public async void Process_ConfirmedOrder_ReturnFalse()
         {
             //Arrange
-            _uof.Setup(p => p.Orders.ReadAsync(id)(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+            _uof.Setup(p => p.Orders.ReadAsync(It.IsAny<int>())).ReturnsAsync(await GetConfirmedUnitOrder());
 
             var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
-
+            
             //Act
             var expected = false;
             var result = await manipulator.Process(1, true);
@@ -200,9 +208,63 @@ namespace XUnitTestProject
             Assert.Equal(result, expected);
         }
 
+        [Fact]
+        public async void Process_NoeEnoughProducts_ReturnsFalse()
+        {
+            //Arrange
+            _uof.Setup(p => p.Orders.ReadWithProductsAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithLackProducts());
+            _uof.Setup(p => p.Orders.ReadAsync(It.IsAny<int>())).ReturnsAsync(await GetUnitOrderWithProducts());
+            _uof.Setup(p => p.Orders.DeclineOrder(It.IsAny<int>())).Returns(Task.CompletedTask);
+            _uof.Setup(p => p.SaveAsync()).Returns(Task.CompletedTask);
+
+            var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
+
+            //Act
+            var expected = true;
+            var result = await manipulator.Process(1, true);
+
+
+            //Assert
+            _uof.VerifyAll();
+            Assert.Equal(expected, result);
+        }
+
         private async Task<UnitOrder> GetConfirmedUnitOrder()
         {
-            return new UnitOrder { State = OrderState.Confirmed };
+            return  new UnitOrder { State = OrderState.Confirmed };
+        }
+        #endregion
+
+        #region CreateOrder
+        [Fact]
+        public void CreateOrder_NormalValues_ReturnsTrue()
+        {
+            //Arrange
+            _uof.Setup(p => p.Orders.CreateAsync(It.IsAny<UnitOrder>())).Returns(Task.CompletedTask);
+            _uof.Setup(p => p.SaveAsync()).Returns(Task.CompletedTask);
+            _mapper.Setup(p => p.Map<UnitOrder>(It.IsAny<OrderBLL>())).Returns(new UnitOrder());
+
+            var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
+
+            //Act
+            var expected = true;
+            var result = manipulator.CreateOrder(1, new int[] { 1, 2 }, TypeOfDeliveryBLL.CourierDelivery).Result; //(1, { 1,2}, de);
+
+
+            //Assert
+            _uof.VerifyAll();
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void TestMethod()
+        {
+            _uof.Setup(p => p.Orders.ReadAsync(It.IsAny<int>()));//.Verifiable();
+            _uof.Setup(p => p.Orders.AcceptOrder(It.IsAny<int>()));
+
+            var manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
+            manipulator.Test_Method();
+
+            _uof.VerifyAll();
         }
         #endregion
 
