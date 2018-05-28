@@ -11,6 +11,7 @@ namespace BusinessLogicLayer.Profiles
     {
         public BLLProfile()
         {
+            CreateMap<IEnumerable<UnitProduct>, List<ProductBLL>>();
             CreateMap<UnitProduct, ProductBLL>();
             CreateMap<ProductBLL, UnitProduct>();
 
