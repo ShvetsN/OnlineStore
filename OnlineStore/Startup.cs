@@ -24,6 +24,10 @@ using AutoMapper;
 using BusinessLogicLayer.Interfaces;
 using UnitOfWork.Repositories;
 
+//delete
+using BusinessLogicLayer.Models;
+using UnitOfWork.Models;
+
 namespace OnlineStore
 {
     public class Startup
@@ -97,19 +101,22 @@ namespace OnlineStore
             /*services.AddScoped<IOrderManipulator, OrderManipulator>();
             services.AddScoped<IProductManipulator, ProductManipulator>();*/
             // services.AddScoped<IUserDbInitializer, UserDbInitializer>();
+            services.AddScoped<CRUDService<UnitCategory, CategoryBLL>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, CRUDService<UnitCategory, CategoryBLL> CRUD)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc();
+            CRUD.Create(new CategoryBLL { Name = "Books" });
         }
     }
 }

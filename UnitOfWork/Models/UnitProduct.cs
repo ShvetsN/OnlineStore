@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    public class UnitProduct
+    public class UnitProduct : UnitEntity
     {
         public int Id { get; set; }
 

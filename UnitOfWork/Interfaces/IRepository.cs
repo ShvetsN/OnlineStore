@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UnitOfWork.Interfaces
 {
-    public interface IRepository<Entity,UnitEntity> where Entity : class where UnitEntity : class
+    public interface IRepository<Entity,UnitEntity> where Entity : DataLayer.Entities.Entity where UnitEntity : Models.UnitEntity
     {
         Task CreateAsync(UnitEntity entity);
         Task DeleteAsync(int id);

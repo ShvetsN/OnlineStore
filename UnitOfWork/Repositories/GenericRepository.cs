@@ -11,7 +11,8 @@ using DataLayer.Contexts;
 namespace UnitOfWork.Repositories
 {
     public class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>
-        where Entity : class where UnitEntity : class
+        where Entity : DataLayer.Entities.Entity 
+        where UnitEntity : Models.UnitEntity
     {
         protected readonly StoreContext _context;
         protected readonly IMapper _mapper;

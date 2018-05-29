@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataLayer.Entities
 {
-    public class Product
+    public class Product : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }

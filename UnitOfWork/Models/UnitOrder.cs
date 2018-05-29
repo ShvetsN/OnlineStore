@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnitOfWork.Models
 {
-    public class UnitOrder
+    public class UnitOrder : UnitEntity
     {
         public int Id { get; set; }
 
