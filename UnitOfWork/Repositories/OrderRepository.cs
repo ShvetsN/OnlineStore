@@ -9,7 +9,6 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using UnitOfWork.Interfaces;
-using System.Linq;
 
 namespace UnitOfWork.Repositories
 {

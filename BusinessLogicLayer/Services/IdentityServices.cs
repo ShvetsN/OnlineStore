@@ -30,7 +30,7 @@ namespace BusinessLogicLayer.Services
                 var user = _mapper.Map<LoginUser>(loginUser);
                 return await _userUnitOfWork.AuthorizationAsync(user);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }    
