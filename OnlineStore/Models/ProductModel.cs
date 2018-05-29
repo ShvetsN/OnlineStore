@@ -15,9 +15,11 @@ namespace OnlineStore.Models
         [Required]
         public int CategoryId { get; set; }
         [Required]
+        [Range(0, 100000)]
         public double Price { get; set; }
         public string Photo { get; set; }
         [Required]
+        [Range(0, 1000)]
         public int Amount { get; set; }
     }
 }
