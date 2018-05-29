@@ -6,7 +6,7 @@ using BusinessLogicLayer.Models;
 
 namespace BusinessLogicLayer.Interfaces
 {
-    public interface IProductManipulator
+    public interface IProductService
     {
         Task<bool> CreateProduct(ProductBLL product);
         Task<bool> UpdateProduct(ProductBLL updProduct);

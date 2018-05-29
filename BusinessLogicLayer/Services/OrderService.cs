@@ -13,21 +13,11 @@ using UnitOfWork.Models;
 namespace BusinessLogicLayer.Services
 {
 
-    public class OrderManipulator : IOrderManipulator
+    public class OrderService :BaseService, IOrderService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public OrderManipulator(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+     
+        public OrderService(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork, mapper) { }    
 
-        public void Test_Method()
-        {
-            _unitOfWork.Orders.ReadAsync(1);
-            _unitOfWork.Orders.AcceptOrder(1);
-        }
         /**
          * ATTENTION!ATTENTION!ATTENTION! 
          * We could just use UnitOrder without OrderBLL and mapping but rusik13312 is a person without even rating on github

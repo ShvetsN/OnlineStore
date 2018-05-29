@@ -16,13 +16,13 @@ namespace OnlineStore.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
     public class CategoryController : Controller
     {
-        private readonly ICategoryManipulator _categoryManipulator;
-        IMapper _mapper;
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryManipulator categoryManipulator, IMapper mapper)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             
-                _categoryManipulator = categoryManipulator;
+                _categoryService = categoryService;
                 _mapper = mapper;
             
         }
@@ -33,7 +33,7 @@ namespace OnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _categoryManipulator.CreateCategory(_mapper.Map<CategoryBLL>(category));
+                var result = await _categoryService.CreateCategory(_mapper.Map<CategoryBLL>(category));
                 if (result)
                     return Ok(result);
                 else
@@ -48,7 +48,7 @@ namespace OnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _categoryManipulator.UpdateCategory(_mapper.Map<CategoryBLL>(category));
+                var result = await _categoryService.UpdateCategory(_mapper.Map<CategoryBLL>(category));
                 if (result)
                     return Ok(result);
                 else
@@ -62,7 +62,7 @@ namespace OnlineStore.Controllers
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             
-                var result = await _categoryManipulator.DeleteCategory(id);
+                var result = await _categoryService.DeleteCategory(id);
                 if (result)
                     return Ok(result);
                 else

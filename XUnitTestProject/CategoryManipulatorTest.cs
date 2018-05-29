@@ -16,12 +16,12 @@ namespace XUnitTestProject
     {
         Mock<IUnitOfWork> _uof;
         Mock<IMapper> _mapper;
-        CategoryManipulator _manipulator;
+        CategoryService _manipulator;
         public CategoryManipulatorTest()
         {
             _uof = new Mock<IUnitOfWork>();
             _mapper = new Mock<IMapper>();
-            _manipulator = new CategoryManipulator(_uof.Object, _mapper.Object);
+            _manipulator = new CategoryService(_uof.Object, _mapper.Object);
         }
         [Fact]
         public void CreateCategory_NormalValues_ReturnsTrues()

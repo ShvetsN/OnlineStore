@@ -14,24 +14,26 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineStore.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager")]
     public class OrderController : Controller
     {
-        private readonly IOrderManipulator _orderManipulator;
-        IMapper _mapper;
+        private readonly IOrderService _orderService;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderManipulator orderManipulator, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper)
         {
-            _orderManipulator = orderManipulator;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
+        
         [HttpPost]
+        [Authorize(Roles = "User")]
         [Route("api/order/create")]
         public async Task<IActionResult> Create([FromBody]int id, [FromBody]int[] products, [FromBody] TypeOfDeliveryModel type)
         {
             
-                var result = await _orderManipulator.CreateOrder(id, products, _mapper.Map<TypeOfDeliveryBLL>(type));
+                var result = await _orderService.CreateOrder(id, products, _mapper.Map<TypeOfDeliveryBLL>(type));
                 if (result)
                     return Ok(result);
                 else
@@ -43,7 +45,7 @@ namespace OnlineStore.Controllers
         [Route("/api/order/process")]
         public async Task<IActionResult> Process([FromBody]int id, [FromBody] bool confirmed)
         {
-            var result = await _orderManipulator.Process(id, confirmed);
+            var result = await _orderService.Process(id, confirmed);
             if (result)
                 return Ok(result);
             else

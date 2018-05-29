@@ -16,12 +16,12 @@ namespace XUnitTestProject
     {
         Mock<IUnitOfWork> _uof;
         Mock<IMapper> _mapper;
-        OrderManipulator _manipulator;
+        OrderService _manipulator;
         public OrderManipulatorTest()
         {
             _uof = new Mock<IUnitOfWork>();
             _mapper = new Mock<IMapper>();
-            _manipulator = new OrderManipulator(_uof.Object, _mapper.Object);
+            _manipulator = new OrderService(_uof.Object, _mapper.Object);
         }
 
         #region DecreaseAmountIfValid_MethodTest

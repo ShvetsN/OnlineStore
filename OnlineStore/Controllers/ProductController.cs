@@ -16,12 +16,12 @@ namespace OnlineStore.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
     public class ProductController : Controller
     {
-        private readonly IProductManipulator _productManipulator;
-        IMapper _mapper;
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductManipulator productManipulator, IMapper mapper)
+        public ProductController(IProductService productService, IMapper mapper)
         {
-            _productManipulator = productManipulator;
+            _productService = productService;
             _mapper = mapper;
         }
 
@@ -31,7 +31,7 @@ namespace OnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _productManipulator.CreateProduct(_mapper.Map<ProductBLL>(product));
+                var result = await _productService.CreateProduct(_mapper.Map<ProductBLL>(product));
                 if (result)
                     return Ok(result);
                 else
@@ -47,7 +47,7 @@ namespace OnlineStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _productManipulator.UpdateProduct(_mapper.Map<ProductBLL>(product));
+                var result = await _productService.UpdateProduct(_mapper.Map<ProductBLL>(product));
             if (result)
                 return Ok(result);
             else
@@ -61,7 +61,7 @@ namespace OnlineStore.Controllers
         [Route("/api/product/delete")]
         public async Task<IActionResult> Delete([FromBody] int id)
         {
-            var result = await _productManipulator.DeleteProduct(id);
+            var result = await _productService.DeleteProduct(id);
             if (result)
                 return Ok(result);
             else

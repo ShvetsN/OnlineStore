@@ -12,15 +12,10 @@ using BusinessLogicLayer.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    class ShowingServices : IShowing
+    class ShowingService : BaseService, IShowingService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public ShowingServices(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+
+        public ShowingService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
 
         public async Task<IEnumerable<ProductBLL>> GetAll()
         {

@@ -12,11 +12,11 @@ using OnlineStore.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager, Administrator")]
     public class StatisticController: Controller
     {
         private readonly IStatisticService _statisticService;
-        IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public StatisticController(IStatisticService statisticService, IMapper mapper)
         {

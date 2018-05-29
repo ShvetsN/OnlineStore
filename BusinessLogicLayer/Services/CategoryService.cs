@@ -10,16 +10,10 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class CategoryManipulator : ICategoryManipulator
+    public class CategoryService : BaseService, ICategoryService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public CategoryManipulator(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _mapper = mapper;
-        }
+
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
 
         public async Task<bool> CreateCategory(CategoryBLL category)
         {

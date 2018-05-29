@@ -16,12 +16,12 @@ namespace XUnitTestProject
     {
         Mock<IUnitOfWork> _uof;
         Mock<IMapper> _mapper;
-        StatisticServices _service;
+        StatisticService _service;
         public StatisticServicesTest()
         {
             _uof = new Mock<IUnitOfWork>();
             _mapper = new Mock<IMapper>();
-            _service = new StatisticServices(_uof.Object, _mapper.Object);
+            _service = new StatisticService(_uof.Object, _mapper.Object);
         }
 
         [Fact]

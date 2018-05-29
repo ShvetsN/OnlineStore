@@ -11,18 +11,11 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class StatisticServices: IStatisticService
+    public class StatisticService: BaseService, IStatisticService
     {
-        private readonly IUnitOfWork _unitOfWork;
 
-        private readonly IMapper _mapper;
-
-        public StatisticServices(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
+        public StatisticService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
+   
         public async Task<IEnumerable<OrderBLL>> GetOrdersOfSpecialDay(DateTime date)
         {
             var orders = await _unitOfWork.Orders.ReadAllAsync();

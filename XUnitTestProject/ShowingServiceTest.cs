@@ -16,12 +16,12 @@ namespace XUnitTestProject
     {
         Mock<IUnitOfWork> _uof;
         Mock<IMapper> _mapper;
-        ShowingServices _service;
+        ShowingService _service;
         public ShowingServiceTest()
         {
             _uof = new Mock<IUnitOfWork>();
             _mapper = new Mock<IMapper>();
-            _service = new ShowingServices(_uof.Object, _mapper.Object);
+            _service = new ShowingService(_uof.Object, _mapper.Object);
         }
         [Fact]
         public async void GetAll_Returns_allProducts()

@@ -16,12 +16,12 @@ namespace XUnitTestProject
     {
         Mock<IUnitOfWork> _uof;
         Mock<IMapper> _mapper;
-        ProductManipulator _manipulator;
+        ProductService _manipulator;
         public ProductManipulatorTest()
         {
             _uof = new Mock<IUnitOfWork>();
             _mapper = new Mock<IMapper>();
-            _manipulator = new ProductManipulator(_uof.Object, _mapper.Object);
+            _manipulator = new ProductService(_uof.Object, _mapper.Object);
         }
         [Fact]
         public void CreateProduct_NormalValues_ReturnsTrues()

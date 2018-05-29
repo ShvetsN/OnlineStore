@@ -13,14 +13,13 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineStore.Controllers
 {
-    [AllowAnonymous]
     public class ShowingController :Controller
     {
 
-        private readonly IShowing _showingService;
-        IMapper _mapper;
+        private readonly IShowingService _showingService;
+        private readonly IMapper _mapper;
 
-        public ShowingController(IShowing showingService, IMapper mapper)
+        public ShowingController(IShowingService showingService, IMapper mapper)
         {
             _showingService = showingService;
             _mapper = mapper;
