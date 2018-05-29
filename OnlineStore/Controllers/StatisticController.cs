@@ -36,8 +36,13 @@ namespace OnlineStore.Controllers
         [Route("/api/statistic/products")]
         public async Task<IActionResult> Stat([FromQuery] ProductModel product)
         {
-            var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
-            return Ok(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
+                return Ok(result);
+            }
+            else
+                return BadRequest();
         }
     }
 }

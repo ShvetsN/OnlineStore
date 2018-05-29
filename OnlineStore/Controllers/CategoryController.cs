@@ -21,41 +21,54 @@ namespace OnlineStore.Controllers
 
         public CategoryController(ICategoryManipulator categoryManipulator, IMapper mapper)
         {
-            _categoryManipulator = categoryManipulator;
-            _mapper = mapper;
+            
+                _categoryManipulator = categoryManipulator;
+                _mapper = mapper;
+            
         }
 
         [HttpPost]
         [Route("/api/category/create")]
         public async Task<IActionResult> Create([FromBody] CategoryModel category)
         {
-            var result = await _categoryManipulator.CreateCategory(_mapper.Map<CategoryBLL>(category));
-            if (result)
-                return Ok(result);
-            else
-                return BadRequest(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _categoryManipulator.CreateCategory(_mapper.Map<CategoryBLL>(category));
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest(result);
+            }
+            else return BadRequest();
         }
 
         [HttpPut]
         [Route("api/category/update")]
         public async Task<IActionResult> Update([FromBody] CategoryModel category)
         {
-            var result = await _categoryManipulator.UpdateCategory(_mapper.Map<CategoryBLL>(category));
-            if (result)
-                return Ok(result);
-            else
-                return BadRequest(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _categoryManipulator.UpdateCategory(_mapper.Map<CategoryBLL>(category));
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest(result);
+            }
+            else return BadRequest();
         }
 
         [HttpDelete]
         [Route("api/category/delete")]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
-            var result = await _categoryManipulator.DeleteCategory(id);
-            if (result)
-                return Ok(result);
-            else
-                return BadRequest(result);
+            
+                var result = await _categoryManipulator.DeleteCategory(id);
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest(result);
+            
+       
         }
     }
 }
