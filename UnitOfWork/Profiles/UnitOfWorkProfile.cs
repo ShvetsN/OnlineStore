@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnitOfWork.Models;
-using DataLayer.Entities;
 
 namespace UnitOfWork.Profiles
 {

@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿ using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Models;
 using OnlineStore.Models;
 using BusinessLogicLayer.Services;
@@ -7,15 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnitOfWork.Models;
-using UnitOfWork.UnitOfWork;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineStore.Controllers
 {
+    [AllowAnonymous]
     public class IdentityController: Controller
     {
-        IIdentityService _userServices;
+        private readonly IIdentityService _userServices;
         IMapper _mapper;
 
         public IdentityController(IIdentityService userServices, IMapper mapper)
@@ -28,21 +28,29 @@ namespace OnlineStore.Controllers
         [Route("api/registrate")]
         public async Task<IActionResult> Registration([FromBody] RegistrationUserModel user)
         {
-            
-            var token = await _userServices.Registrate(_mapper.Map<RegistrationUserBLL>(user));
-            if ( token == null)
-                BadRequest();
-            return Ok(token);
+            if (ModelState.IsValid)
+            {
+                var token = await _userServices.Registrate(_mapper.Map<RegistrationUserBLL>(user));
+                if (token == null)
+                    BadRequest();
+                return Ok(token);
+            }
+            else
+                return BadRequest();
         }
 
         [HttpPost]
         [Route("api/login")]
         public async Task<IActionResult> Login([FromBody] LoginUserModel user) 
         {
-            var token = await _userServices.Login(_mapper.Map<LoginUserBLL>(user));
-            if (token == null)
-                BadRequest();
-            return Ok(token);
+            if (ModelState.IsValid)
+            {
+                var token = await _userServices.Login(_mapper.Map<LoginUserBLL>(user));
+                if (token == null)
+                    BadRequest();
+                return Ok(token);
+            }
+            else return BadRequest();
         }
     }
 }

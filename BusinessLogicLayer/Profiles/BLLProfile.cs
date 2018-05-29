@@ -11,6 +11,10 @@ namespace BusinessLogicLayer.Profiles
     {
         public BLLProfile()
         {
+            CreateMap<CategoryBLL, UnitCategory>().ReverseMap();
+
+            CreateMap<IEnumerable<UnitProduct>, List<ProductBLL>>();
+
             CreateMap<UnitProduct, ProductBLL>();
             CreateMap<ProductBLL, UnitProduct>();
 

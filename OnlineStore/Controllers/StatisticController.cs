@@ -8,40 +8,41 @@ using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineStore.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager, Administrator")]
     public class StatisticController: Controller
     {
         private readonly IStatisticService _statisticService;
-        
+        private readonly IMapper _mapper;
 
-        public StatisticController(IStatisticService statisticService)
+        public StatisticController(IStatisticService statisticService, IMapper mapper)
         {
             _statisticService = statisticService;
-            
+            _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("/api/stat")]
-        public async Task<IActionResult> Statistic()
+        [Route("/api/statistic/specialday")]
+        public async Task<IActionResult> Statistic([FromQuery] DateTime date)
         {
-            DateTime date = DateTime.Today;
             var result = await _statisticService.GetOrdersOfSpecialDay(date);
             return Ok(result);
         }
 
         [HttpGet]
-        [Route("/api/stati")]
-        public async Task<IActionResult> Stat()
+        [Route("/api/statistic/products")]
+        public async Task<IActionResult> Stat([FromQuery] ProductModel product)
         {
-            ProductBLL product = new ProductBLL
+            if (ModelState.IsValid)
             {
-                Id = 1
-            };
-            var result = await _statisticService.GetAmountOfSpecialProductsInOrders(product);
-            return Ok(result);
+                var result = await _statisticService.GetAmountOfSpecialProductsInOrders(_mapper.Map<ProductBLL>(product));
+                return Ok(result);
+            }
+            else
+                return BadRequest();
         }
     }
 }

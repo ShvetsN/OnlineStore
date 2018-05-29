@@ -12,15 +12,10 @@ using BusinessLogicLayer.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    class ShowingServices : IShowing
+    class ShowingService : BaseService, IShowingService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public ShowingServices(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+
+        public ShowingService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
 
         public async Task<IEnumerable<ProductBLL>> GetAll()
         {
@@ -28,19 +23,19 @@ namespace BusinessLogicLayer.Services
             {
                 var products = await _unitOfWork.Products.ReadAllAsync();
                 return _mapper.Map<IEnumerable<ProductBLL>>(products);
-            }
+        }
             catch (Exception)
             {
                 return null;
             }
-        }
+}
 
-        public async Task<IEnumerable<ProductBLL>> GetForCategory(string category)
+        public async Task<IEnumerable<ProductBLL>> GetForCategory(int categoryId)
         {
             try
             {
-                var products = await _unitOfWork.Products.ReadAllAsync();
-               return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Category.Name == category));
+               var products = await _unitOfWork.Products.ReadAllAsync();
+               return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.CategoryId == categoryId));
             }
             catch (Exception)
             {
@@ -53,7 +48,7 @@ namespace BusinessLogicLayer.Services
             try
             {
                 var products = await _unitOfWork.Products.ReadAllAsync();
-                return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Name.Contains(request)));
+                return _mapper.Map<IEnumerable<ProductBLL>>(products.Where(c => c.Name.Equals(request, StringComparison.OrdinalIgnoreCase)));
             }
             catch (Exception)
             {
@@ -73,5 +68,7 @@ namespace BusinessLogicLayer.Services
                 return null;
             }
         }
+
+        
     }
 }

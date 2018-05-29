@@ -18,7 +18,7 @@ namespace DataLayer.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasOne(c => c.Category).
-                WithMany(c => c.Products).HasForeignKey(c => c.CategoryId);
+                WithMany(c => c.Products).HasForeignKey(c => c.CategoryId); //.OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<ProductOrder>()
             .HasKey(t => t.Id);
@@ -32,6 +32,8 @@ namespace DataLayer.Contexts
                 .HasOne(sc => sc.Product)
                 .WithMany(s => s.Orders)
                 .HasForeignKey(sc => sc.ProductId);
+
+            modelBuilder.Entity<Category>().HasKey(c => c.Id);
         }
     }
 }

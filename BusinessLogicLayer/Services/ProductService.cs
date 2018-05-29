@@ -11,17 +11,11 @@ using UnitOfWork.Models;
 
 namespace BusinessLogicLayer.Services
 {
-    public class ProductManipulator : IProductManipulator
+    public class ProductService :BaseService, IProductService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public ProductManipulator(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _mapper = mapper;
-        }
 
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper):  base(unitOfWork, mapper) { }
+  
         public async Task<bool> CreateProduct(ProductBLL product)
         {
             try
@@ -31,7 +25,7 @@ namespace BusinessLogicLayer.Services
                 await _unitOfWork.SaveAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

@@ -13,15 +13,10 @@ using UnitOfWork.Models;
 namespace BusinessLogicLayer.Services
 {
 
-    public class OrderManipulator : IOrderManipulator
+    public class OrderService :BaseService, IOrderService
     {
-        IUnitOfWork _unitOfWork;
-        IMapper _mapper;
-        public OrderManipulator(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+     
+        public OrderService(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork, mapper) { }    
 
         /**
          * ATTENTION!ATTENTION!ATTENTION! 
@@ -53,7 +48,7 @@ namespace BusinessLogicLayer.Services
             {
                 return false;
             }
-        }
+}
 
         public async Task<bool> Process(int id, bool confirmed)
         {   
@@ -97,7 +92,7 @@ namespace BusinessLogicLayer.Services
         /**
          * Get all products in order
          * Return collection of non-repeating products with updated amount
-         * If there're not enough amount at any product return null 
+         * If there're not enough amount at any product returns null 
          */
 
         internal protected async Task<IEnumerable<UnitProduct>> DecreaseAmountIfValid(int id)

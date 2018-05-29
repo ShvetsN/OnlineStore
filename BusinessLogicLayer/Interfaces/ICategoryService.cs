@@ -7,7 +7,7 @@ using BusinessLogicLayer.Models;
 namespace BusinessLogicLayer.Interfaces
 {
     //In future it will be Generic type
-    public interface ICategoryManipulator
+    public interface ICategoryService
     {
         Task<bool> CreateCategory(CategoryBLL category);
         Task<bool> UpdateCategory(CategoryBLL updCategory);

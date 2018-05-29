@@ -10,7 +10,8 @@ using DataLayer.Contexts;
 
 namespace UnitOfWork.Repositories
 {
-    public class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>  where Entity : class where UnitEntity : class
+    public class GenericRepository<Entity,UnitEntity> : IRepository<Entity,UnitEntity>
+        where Entity : class where UnitEntity : class
     {
         protected readonly StoreContext _context;
         protected readonly IMapper _mapper;

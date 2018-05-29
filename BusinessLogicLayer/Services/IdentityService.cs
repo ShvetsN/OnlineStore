@@ -11,13 +11,13 @@ using UnitOfWork.UnitOfWork;
 
 namespace BusinessLogicLayer.Services
 {
-    public class IdentityServices: IIdentityService
+    public class IdentityService : IIdentityService
     {
         private readonly IUserUnitOfWork _userUnitOfWork;
 
         private readonly IMapper _mapper;
 
-        public IdentityServices(IUserUnitOfWork userUnitOfWork, IMapper mapper)
+        public IdentityService(IUserUnitOfWork userUnitOfWork, IMapper mapper)
         {
             _userUnitOfWork = userUnitOfWork;
             _mapper = mapper;
@@ -30,7 +30,7 @@ namespace BusinessLogicLayer.Services
                 var user = _mapper.Map<LoginUser>(loginUser);
                 return await _userUnitOfWork.AuthorizationAsync(user);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }    
@@ -43,7 +43,7 @@ namespace BusinessLogicLayer.Services
                 var user = _mapper.Map<RegistrationUser>(registrationUser);
                 return await _userUnitOfWork.RegistrationAsync(user);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
