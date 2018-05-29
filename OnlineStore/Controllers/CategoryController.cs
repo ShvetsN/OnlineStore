@@ -59,7 +59,7 @@ namespace OnlineStore.Controllers
 
         [HttpDelete]
         [Route("api/category/delete")]
-        public async Task<IActionResult> Delete([FromQuery] int id)
+        public async Task<IActionResult> Delete([FromBody] int id)
         {
             
                 var result = await _categoryService.DeleteCategory(id);
