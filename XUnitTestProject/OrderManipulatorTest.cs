@@ -240,7 +240,13 @@ namespace XUnitTestProject
 
             //Act
             var expected = true;
-            var result = _manipulator.CreateOrder(1, new int[] { 1, 2 }, TypeOfDeliveryBLL.CourierDelivery).Result; //(1, { 1,2}, de);
+            var order = new OrderBLL
+            {
+                CustomerId = 1,
+                Products = new List<ProductOrderBLL> { new ProductOrderBLL { ProductId = 1 }, new ProductOrderBLL { ProductId = 2 } },
+                DeliveryType = TypeOfDeliveryBLL.CourierDelivery
+            };
+            var result = _manipulator.CreateOrder(order).Result;
 
 
             //Assert

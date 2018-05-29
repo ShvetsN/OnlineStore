@@ -48,10 +48,10 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _productService.UpdateProduct(_mapper.Map<ProductBLL>(product));
-            if (result)
-                return Ok(result);
-            else
-                return BadRequest(result);
+                if (result)
+                    return Ok(result);
+                else
+                    return BadRequest(result);
             }
             else
                 return BadRequest();

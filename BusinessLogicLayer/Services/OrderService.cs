@@ -23,19 +23,13 @@ namespace BusinessLogicLayer.Services
          * We could just use UnitOrder without OrderBLL and mapping but rusik13312 is a person without even rating on github
          * 
          */
-        public async Task<bool> CreateOrder(int customerId, int[] products, TypeOfDeliveryBLL deliveryType)
+        public async Task<bool> CreateOrder(OrderBLL order)
         {
-            if (products == null)
-            {
+            if (order.Products == null || order.Products.Count == 0)
                 return false;
-            }
             try
             {
-                OrderBLL order = new OrderBLL { CustomerId = customerId, DeliveryType = deliveryType, Date = DateTime.Now };
-                foreach (int a in products)
-                {
-                    order.Products.Add(new ProductOrderBLL { ProductId = a });
-                }
+                order.Date = DateTime.Now;
 
                 var unitOrder = _mapper.Map<UnitOrder>(order);
 

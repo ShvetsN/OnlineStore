@@ -30,14 +30,19 @@ namespace OnlineStore.Controllers
         [HttpPost]
         [Authorize(Roles = "User")]
         [Route("api/order/create")]
-        public async Task<IActionResult> Create([FromBody]int id, [FromBody]int[] products, [FromBody] TypeOfDeliveryModel type)
+        public async Task<IActionResult> Create([FromBody]OrderModel order)
         {
-            
-                var result = await _orderService.CreateOrder(id, products, _mapper.Map<TypeOfDeliveryBLL>(type));
+            if (ModelState.IsValid)
+            {
+                var item = _mapper.Map<OrderBLL>(order);
+                var result = await _orderService.CreateOrder(item);
                 if (result)
                     return Ok(result);
                 else
                     return BadRequest(result);
+            }
+            else
+                return BadRequest();
             
         }
 

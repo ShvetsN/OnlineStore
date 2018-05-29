@@ -11,7 +11,6 @@ namespace OnlineStore.Models
         public int Id { get; set; }
         [Required]
         public int CustomerId { get; set; }
-        [Required]
         public DateTime Date { get; set; }
         [Required]
         public TypeOfDeliveryModel DeliveryType { get; set; }
